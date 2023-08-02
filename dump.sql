@@ -41,7 +41,8 @@ SET default_table_access_method = heap;
 CREATE TABLE public.urls (
     id integer NOT NULL,
     url character varying(255) NOT NULL,
-    shorturl character varying(8) NOT NULL
+    shorturl character varying(8) NOT NULL,
+    createdat timestamp without time zone DEFAULT CURRENT_TIMESTAMP
 );
 
 
@@ -117,7 +118,7 @@ ALTER TABLE ONLY public.usuarios ALTER COLUMN id SET DEFAULT nextval('public.usu
 -- Data for Name: urls; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.urls VALUES (1, 'https://teste.com', 'g1SDJrui');
+INSERT INTO public.urls VALUES (1, 'https://teste.com', 'g1SDJrui', '2023-08-02 16:42:19.700417');
 
 
 --
