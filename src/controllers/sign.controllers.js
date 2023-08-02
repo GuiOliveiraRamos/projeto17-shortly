@@ -34,7 +34,7 @@ export async function signIn(req, res) {
 
     console.log(userResult.rows);
 
-    if (userResult.rowCount === 0) return res.sendStatus(400);
+    if (userResult.rowCount === 0) return res.sendStatus(401);
 
     const user = userResult.rows[0];
 
