@@ -35,6 +35,37 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: urls; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.urls (
+    id integer NOT NULL,
+    url character varying(255) NOT NULL,
+    shorturl character varying(8) NOT NULL
+);
+
+
+--
+-- Name: urls_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.urls_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: urls_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.urls_id_seq OWNED BY public.urls.id;
+
+
+--
 -- Name: usuarios; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -69,6 +100,13 @@ ALTER SEQUENCE public.usuarios_id_seq OWNED BY public.usuarios.id;
 
 
 --
+-- Name: urls id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.urls ALTER COLUMN id SET DEFAULT nextval('public.urls_id_seq'::regclass);
+
+
+--
 -- Name: usuarios id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -76,16 +114,41 @@ ALTER TABLE ONLY public.usuarios ALTER COLUMN id SET DEFAULT nextval('public.usu
 
 
 --
+-- Data for Name: urls; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.urls VALUES (1, 'https://teste.com', 'g1SDJrui');
+
+
+--
 -- Data for Name: usuarios; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO public.usuarios VALUES (1, '513168ee-233a-4f04-80e2-3b43f25fc9f9', 'João', 'joao@driven.com.br', 'driven', '2023-08-02 12:28:18.643046');
+INSERT INTO public.usuarios VALUES (2, '12e089a1-ea3b-4c9a-bb78-2110847bd9f9', 'Joãozin', 'joao@driven.com', '$2b$10$biKf1/qCjb0Vi6uxGTtOtOpWVeIp7NNxit/BOOgKuLIJ0IjgBI7ta', '2023-08-02 14:54:54.313413');
+INSERT INTO public.usuarios VALUES (3, 'ebc0c0f7-68a7-4ce4-b513-4ebb2409e0fd', 'gui', 'gui@gmail.com', '$2b$10$i06N1OKiW9eedOlA/pSEzu9iAuclSd1qcbGy7P0FCXMuns1QetgQy', '2023-08-02 14:56:41.856725');
+
+
+--
+-- Name: urls_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.urls_id_seq', 1, true);
 
 
 --
 -- Name: usuarios_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.usuarios_id_seq', 1, false);
+SELECT pg_catalog.setval('public.usuarios_id_seq', 3, true);
+
+
+--
+-- Name: urls urls_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.urls
+    ADD CONSTRAINT urls_pkey PRIMARY KEY (id);
 
 
 --
