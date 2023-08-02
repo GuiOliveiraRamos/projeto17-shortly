@@ -2,6 +2,6 @@ import { Router } from "express";
 
 const usersRoutes = Router();
 
-usersRoutes;
+usersRoutes.get("/users/me");
 
 export default usersRoutes;
