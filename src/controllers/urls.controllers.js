@@ -8,16 +8,16 @@ export async function newUrl(req, res) {
     const authorization = req.headers.authorization;
     if (!authorization) return res.sendStatus(401);
 
-    const short_url = nanoid(8);
+    const shorturl = nanoid(8);
 
     const insertUrlQuery =
-      "INSERT INTO urls (url, short_url) VALUES ($1, $2) RETURNING id";
-    const insertUrlValues = [url, short_url];
+      "INSERT INTO urls (url, shorturl) VALUES ($1, $2) RETURNING id";
+    const insertUrlValues = [url, shorturl];
     const insertUrlResult = await db.query(insertUrlQuery, insertUrlValues);
 
     const id = insertUrlResult.rows[0].id;
 
-    res.status(201).json({ id, short_url });
+    res.status(201).json({ id, shorturl });
   } catch (err) {
     res.status(500).send(err.message);
   }
@@ -26,28 +26,28 @@ export async function newUrl(req, res) {
 export async function getUrlById(req, res) {
   const { id } = req.params;
   try {
-    const query = "SELECT id,url,short_url FROM urls WHERE id = $1";
+    const query = "SELECT id,url,shorturl FROM urls WHERE id = $1";
     const values = [id];
     const result = await db.query(query, values);
 
     if (result.rows.length === 0) return res.sendStatus(404);
 
     const urlData = result.rows[0];
-    const { short_url, url } = urlData;
-    res.status(200).json({ id, url, short_url });
+    const { shorturl, url } = urlData;
+    res.status(200).json({ id, url, shorturl });
   } catch (err) {
     res.status(500).send(err.message);
   }
 }
 
 export async function getShortUrl(req, res) {
-  const { short_url } = req.params;
+  const { shorturl } = req.params;
 
   try {
     console.log("getShortUrl: Start");
-    console.log("getShortUrl: Short URL:", short_url);
-    const query = "SELECT url FROM urls WHERE short_url = $1";
-    const values = [short_url];
+    console.log("getShortUrl: Short URL:", shorturl);
+    const query = "SELECT url FROM urls WHERE shorturl = $1";
+    const values = [shorturl];
     const result = await db.query(query, values);
     console.log("getShortUrl: Database Query Result:", result.rows);
 
@@ -59,8 +59,8 @@ export async function getShortUrl(req, res) {
     console.log("getShortUrl: Original URL:", url);
 
     const updateViewsQuery =
-      "UPDATE urls SET views = views + 1 WHERE short_url = $1";
-    await db.query(updateViewsQuery, [short_url]);
+      "UPDATE urls SET views = views + 1 WHERE shorturl = $1";
+    await db.query(updateViewsQuery, [shorturl]);
     console.log("getShortUrl: Redirecting to URL:", url);
 
     res.redirect(url);

@@ -41,7 +41,7 @@ SET default_table_access_method = heap;
 CREATE TABLE public.urls (
     id integer NOT NULL,
     url character varying(255) NOT NULL,
-    short_url character varying(8) NOT NULL,
+    shorturl character varying(8) NOT NULL,
     views integer DEFAULT 0
 );
 
@@ -118,10 +118,9 @@ ALTER TABLE ONLY public.usuarios ALTER COLUMN id SET DEFAULT nextval('public.usu
 -- Data for Name: urls; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.urls VALUES (1, 'https://teste.com', 'ejwLNtGB', 0);
-INSERT INTO public.urls VALUES (2, 'https://teste.com', '-c4m5JJG', 0);
-INSERT INTO public.urls VALUES (3, 'https://teste.com', '_Xtp_29P', 0);
-INSERT INTO public.urls VALUES (4, 'https://teste.com', 'HgKndr6o', 1);
+INSERT INTO public.urls VALUES (2, 'https://teste.com', 'KYXrxyBL', 0);
+INSERT INTO public.urls VALUES (3, 'https://teste.com', 'rd6j0zNm', 0);
+INSERT INTO public.urls VALUES (1, 'https://teste.com', 'DqHGACpt', 1);
 
 
 --
@@ -137,7 +136,7 @@ INSERT INTO public.usuarios VALUES (3, 'ebc0c0f7-68a7-4ce4-b513-4ebb2409e0fd', '
 -- Name: urls_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.urls_id_seq', 4, true);
+SELECT pg_catalog.setval('public.urls_id_seq', 3, true);
 
 
 --
