@@ -42,7 +42,8 @@ CREATE TABLE public.urls (
     id integer NOT NULL,
     url character varying(255) NOT NULL,
     shorturl character varying(8) NOT NULL,
-    views integer DEFAULT 0
+    views integer DEFAULT 0,
+    createdat timestamp without time zone DEFAULT CURRENT_TIMESTAMP
 );
 
 
@@ -118,9 +119,9 @@ ALTER TABLE ONLY public.usuarios ALTER COLUMN id SET DEFAULT nextval('public.usu
 -- Data for Name: urls; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.urls VALUES (2, 'https://teste.com', 'KYXrxyBL', 0);
-INSERT INTO public.urls VALUES (3, 'https://teste.com', 'rd6j0zNm', 0);
-INSERT INTO public.urls VALUES (1, 'https://teste.com', 'DqHGACpt', 1);
+INSERT INTO public.urls VALUES (2, 'https://teste.com', 'KYXrxyBL', 0, '2023-08-03 11:40:33.52597');
+INSERT INTO public.urls VALUES (3, 'https://teste.com', 'rd6j0zNm', 0, '2023-08-03 11:40:33.52597');
+INSERT INTO public.urls VALUES (1, 'https://teste.com', 'DqHGACpt', 1, '2023-08-03 11:40:33.52597');
 
 
 --
