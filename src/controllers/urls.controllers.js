@@ -8,6 +8,12 @@ export async function newUrl(req, res) {
     const authorization = req.headers.authorization;
     if (!authorization) return res.sendStatus(401);
 
+    const userQuery = "SELECT id FROM usuarios WHERE uuid = $1";
+    const userValues = [authorization];
+    const userResult = await db.query(userQuery, userValues);
+
+    if (userResult.rowCount === 0) return res.sendStatus(401);
+
     const shortUrl = nanoid(8);
 
     const insertUrlQuery =
@@ -66,6 +72,44 @@ export async function getShortUrl(req, res) {
     res.redirect(url);
   } catch (err) {
     console.error("getShortUrl: Error:", err.message);
+
+    res.status(500).send(err.message);
+  }
+}
+
+export async function deleteShortUrl(req, res) {
+  const { id } = req.params;
+  const authorization = req.headers.authorization;
+
+  try {
+    if (!authorization) return res.sendStatus(401);
+    console.log("Authorization:", authorization);
+
+    const userQuery = "SELECT id FROM usuarios WHERE uuid = $1";
+    const userValues = [authorization];
+    const userResult = await db.query(userQuery, userValues);
+
+    if (userResult.rowCount === 0) return res.sendStatus(401);
+
+    const userId = userResult.rows[0].id;
+
+    console.log("UserId:", userId);
+
+    const urlQuery = 'SELECT id FROM urls WHERE "id" = $1 ';
+    const urlValues = [id];
+    const urlResult = await db.query(urlQuery, urlValues);
+
+    if (urlResult.rowCount === 0) {
+      console.log("URL Query Result:", urlResult.rows);
+      return res.sendStatus(404);
+    }
+
+    const deleteUrlQuery = 'DELETE FROM urls WHERE "id" = $1';
+    await db.query(deleteUrlQuery, [id]);
+
+    res.sendStatus(204);
+  } catch (err) {
+    console.error("Error:", err);
 
     res.status(500).send(err.message);
   }
