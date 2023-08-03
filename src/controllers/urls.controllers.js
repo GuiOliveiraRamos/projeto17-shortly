@@ -8,8 +8,10 @@ export async function newUrl(req, res) {
     const authorization = req.headers.authorization;
     if (!authorization) return res.sendStatus(401);
 
+    const token = authorization.replace("Bearer ", "");
+
     const userQuery = "SELECT id FROM usuarios WHERE uuid = $1";
-    const userValues = [authorization];
+    const userValues = [token];
     const userResult = await db.query(userQuery, userValues);
 
     if (userResult.rowCount === 0) return res.sendStatus(401);
@@ -85,8 +87,10 @@ export async function deleteShortUrl(req, res) {
     if (!authorization) return res.sendStatus(401);
     console.log("Authorization:", authorization);
 
+    const token = authorization.replace("Bearer ", "");
+
     const userQuery = "SELECT id FROM usuarios WHERE uuid = $1";
-    const userValues = [authorization];
+    const userValues = [token];
     const userResult = await db.query(userQuery, userValues);
 
     if (userResult.rowCount === 0) return res.sendStatus(401);
