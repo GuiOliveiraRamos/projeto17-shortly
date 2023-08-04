@@ -120,26 +120,31 @@ ALTER TABLE ONLY public.usuarios ALTER COLUMN id SET DEFAULT nextval('public.usu
 -- Data for Name: urls; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO public.urls VALUES (1, 1, 'H93Kun6h', 'https://cruzeiro.com.br', 0, '2023-08-04 14:37:58.128949');
+INSERT INTO public.urls VALUES (4, 1, 'mJWndyBP', 'https://cruzeiro.com.br', 0, '2023-08-04 14:38:00.898539');
+INSERT INTO public.urls VALUES (5, 1, '98XYS8IE', 'https://cruzeiro.com.br', 3, '2023-08-04 14:38:01.639415');
+INSERT INTO public.urls VALUES (2, 1, 'VaekNBec', 'https://cruzeiro.com.br', 1, '2023-08-04 14:37:59.471486');
 
 
 --
 -- Data for Name: usuarios; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO public.usuarios VALUES (1, '7aee02f6-94d9-4954-bc94-65174a22bd35', 'bia', 'bia@gmail.com', '$2b$10$p/rmxOYpTgso3aRxOdVD6O85sr854D5vsKMhD1FzyNxcNCdbUvLh.', '2023-08-04 14:36:10.520613');
 
 
 --
 -- Name: urls_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.urls_id_seq', 1, false);
+SELECT pg_catalog.setval('public.urls_id_seq', 5, true);
 
 
 --
 -- Name: usuarios_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.usuarios_id_seq', 1, false);
+SELECT pg_catalog.setval('public.usuarios_id_seq', 1, true);
 
 
 --

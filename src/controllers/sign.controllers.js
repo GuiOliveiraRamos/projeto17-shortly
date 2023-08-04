@@ -44,7 +44,15 @@ export async function signIn(req, res) {
 
     if (!validatePassword) return res.sendStatus(401);
 
-    const userToken = uuidv4();
+    let userToken = user.uuid;
+
+    if (!userToken) {
+      userToken = uuidv4();
+
+      const updateUuidQuery = "UPDATE usuarios SET uuid = $1 WHERE id = $2";
+      const updateUuidValues = [userToken, user.id];
+      await db.query(updateUuidQuery, updateUuidValues);
+    }
 
     res.status(200).json({ token: userToken });
   } catch (err) {
