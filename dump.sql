@@ -74,10 +74,11 @@ ALTER SEQUENCE public.urls_id_seq OWNED BY public.urls.id;
 
 CREATE TABLE public.usuarios (
     id integer NOT NULL,
-    uuid character varying(36) NOT NULL,
-    nome character varying(100) NOT NULL,
-    email character varying(100) NOT NULL,
-    senha character varying(100) NOT NULL
+    uuid uuid DEFAULT public.uuid_generate_v4(),
+    name character varying(255) NOT NULL,
+    email character varying(255) NOT NULL,
+    password character varying(255) NOT NULL,
+    created_at timestamp without time zone DEFAULT now()
 );
 
 
@@ -147,6 +148,14 @@ SELECT pg_catalog.setval('public.usuarios_id_seq', 1, false);
 
 ALTER TABLE ONLY public.urls
     ADD CONSTRAINT urls_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: usuarios usuarios_email_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.usuarios
+    ADD CONSTRAINT usuarios_email_key UNIQUE (email);
 
 
 --
