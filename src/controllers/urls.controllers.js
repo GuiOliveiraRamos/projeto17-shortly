@@ -16,11 +16,12 @@ export async function newUrl(req, res) {
 
     if (userResult.rowCount === 0) return res.sendStatus(401);
 
+    const userId = userResult.rows[0].id;
     const shortUrl = nanoid(8);
 
     const insertUrlQuery =
-      'INSERT INTO urls (url, "shortUrl") VALUES ($1, $2) RETURNING id';
-    const insertUrlValues = [url, shortUrl];
+      'INSERT INTO urls (url, "shortUrl", user_id) VALUES ($1, $2, $3) RETURNING id';
+    const insertUrlValues = [url, shortUrl, userId];
     const insertUrlResult = await db.query(insertUrlQuery, insertUrlValues);
 
     const id = insertUrlResult.rows[0].id;
