@@ -8,7 +8,7 @@ export async function getUsers(req, res) {
 
     const token = authorization.replace("Bearer ", "");
 
-    const userQuery = "SELECT id FROM usuarios WHERE uuid = $1";
+    const userQuery = "SELECT id, name FROM usuarios WHERE uuid = $1";
     const userValues = [token];
     const userResult = await db.query(userQuery, userValues);
 

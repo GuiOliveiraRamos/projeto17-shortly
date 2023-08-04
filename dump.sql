@@ -121,7 +121,6 @@ ALTER TABLE ONLY public.usuarios ALTER COLUMN id SET DEFAULT nextval('public.usu
 --
 
 INSERT INTO public.urls VALUES (1, 1, 'H93Kun6h', 'https://cruzeiro.com.br', 0, '2023-08-04 14:37:58.128949');
-INSERT INTO public.urls VALUES (4, 1, 'mJWndyBP', 'https://cruzeiro.com.br', 0, '2023-08-04 14:38:00.898539');
 INSERT INTO public.urls VALUES (5, 1, '98XYS8IE', 'https://cruzeiro.com.br', 3, '2023-08-04 14:38:01.639415');
 INSERT INTO public.urls VALUES (2, 1, 'VaekNBec', 'https://cruzeiro.com.br', 1, '2023-08-04 14:37:59.471486');
 
